@@ -1,0 +1,68 @@
+<!DOCTYPE html>  
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <title>Domai.nr Chrome Extension</title>
+      <link rel="stylesheet" href="style.css" />
+  </head>
+  <body id="container">
+    <div id="left">
+      <form>
+      <div class="input-wrapper">
+        <input type="text" id="query" />
+        <img id="loader" src="images/loading.gif" />
+      </div>
+        <input type="submit" id="button" class="button" value="Search" alt="Loading" />
+    </form>
+      <div id="results">
+        <ul id="results-list">
+          <!-- this gets populated -->
+        </ul>
+      </div>
+    </div>
+      
+      <div id="results-info">
+        <p id="availability"><!-- stuff gets inserted here, depending on whether the domain is available or not --></p>
+        <div class="register-stuff">
+          <ul class="sections">
+            <li class="registrars">
+              <h4>Register at:</h4>
+              <ul>
+                
+              </ul>
+            </li>
+            
+            
+            <li class="tld">
+              <h4>
+                  TLD:<span class="extension"></span>
+                  <!-- a.domain -->
+              </h4>
+              <ul>
+                <li><a href="#" target="_blank" id="wikipedia">Wikipedia</a></li>
+                <li><a href="#" target="_blank" title="Internet Assigned Numbers Authority" id="iana">IANA</a></li>
+                  
+              </ul>
+            </li>
+            
+            
+            <li class="right">
+              <h4>Tools:</h4>
+              <ul>
+                <li class="www"><a href="#" target="_blank" rel="nofollow" data-track-event="Clicked WWW Link">Visit Site (www)</a></li>
+                <li class="whois last"><a href="#" target="_blank" rel="nofollow" data-track-event="Clicked WHOIS Link">WHOIS</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div id="footer">
+        <p>Powered by <a href="http://www.domai.nr" target="_blank" alt="Domai.nr">Domai.nr</a>.</p>
+      </div>
+
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+      <script src="script.js"></script>  
+    </body>
+</html>
