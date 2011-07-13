@@ -10,8 +10,6 @@
 		"128"			: 	"icon_128.png"
 	},
 	"permissions": [
-	  "tabs",
-	  "bookmarks",
 	  "http://domai.nr",
 	  "http://domai.nr/*",
 	  "unlimitedStorage"
