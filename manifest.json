@@ -1,6 +1,6 @@
 {
 	"name"			: 		"Domai.nr Search",
-	"version"		: 		"1.0"   			   ,
+	"version"		: 		"2.0"   			   ,
 	"description"	: 	"Give your domains a happy ending.",
 	"browser_action": 		{
 	  	"default_icon"	: 	"icon.png"
