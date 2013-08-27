@@ -9,7 +9,7 @@ $(document).ready( function() {
     })
   }
 
-  var API_URL = "http://domai.nr/api/json/search?client_id=chrome_extensionq="
+  var API_URL = "https://domai.nr/api/json/search?client_id=chrome_extension&q="
     , selected_domain
 
   $("#search-form").submit( function(ev) {
@@ -27,7 +27,7 @@ $(document).ready( function() {
         $("<p id='search-query'>" + query + "</p>").insertBefore("#results")
       }
       $.each(response.results,function(i, result){
-        $("#results-list").append("<li class='" + result.availability + "'><a href='http://domai.nr/" + query + "'><span class='bg'></span><span class='domain'>" + result.domain + "</span></a></li>")
+        $("#results-list").append("<li class='" + result.availability + "'><a href='https://domai.nr/" + query + "'><span class='bg'></span><span class='domain'>" + result.domain + "</span></a></li>")
       })
 
       $("#loader").css('visibility', 'hidden');     // hide the spinny thingy.
