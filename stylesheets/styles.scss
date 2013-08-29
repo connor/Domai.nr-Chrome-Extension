@@ -115,6 +115,15 @@ ul {
         cursor: pointer;
       }
 
+      &:active, &.selected:active {
+        background: url("../images/blue.png") no-repeat left top;
+        cursor: pointer;
+
+        a {
+          color: #fff;
+        }
+      }
+
    }
 }
 

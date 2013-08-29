@@ -1,5 +1,4 @@
-var previous_search
-
+var t;
 
 $(document).ready( function() {
 
@@ -12,29 +11,32 @@ $(document).ready( function() {
   var API_URL = "https://domai.nr/api/json/search?client_id=chrome_extension&q="
     , selected_domain
 
-  $("#search-form").submit( function(ev) {
-    ev.preventDefault()
+  $("#search-form").submit( function(evt) {
+    evt.preventDefault()
 
     $("#loader").css('visibility', 'visible');
-    var query       = $("#query").val()
-    previous_search = query
-    $.getJSON(API_URL + query, null, function(response) {
+    var query = $("#query").val()
 
-      $("#results-list").empty()
-      if ($("#search-query").length) {
-        $("#search-query").text(query)
-      } else {
-        $("<p id='search-query'>" + query + "</p>").insertBefore("#results")
-      }
-      $.each(response.results,function(i, result){
-        $("#results-list").append("<li class='" + result.availability + "'><a href='https://domai.nr/" + query + "'><span class='bg'></span><span class='domain'>" + result.domain + "</span></a></li>")
-      })
-
+    if (!query.length) {
+      $("#search-query").remove();
+      $.each($("#results-list li"), function(idx, el) {
+        $(el).remove();
+      });
       $("#loader").css('visibility', 'hidden');     // hide the spinny thingy.
-
-
-    })
-
+    } else {
+      $.getJSON(API_URL + query, null, function(response) {
+        $("#results-list").empty()
+        if ($("#search-query").length) {
+          $("#search-query").text(query)
+        } else {
+          $("<p id='search-query'>" + query + "</p>").insertBefore("#results")
+        }
+        $.each(response.results,function(i, result){
+          $("#results-list").append("<li class='" + result.availability + "'><a href='https://domai.nr/" + query + "'><span class='bg'></span><span class='domain'>" + result.domain + "</span></a></li>")
+        })
+        $("#loader").css('visibility', 'hidden');     // hide the spinny thingy.
+      });
+    }
   })
 
   function moveSelectionUp() {
@@ -50,7 +52,7 @@ $(document).ready( function() {
     } else {
       $("#results-list li").last().addClass('selected')
     }
-  }
+  };
 
   function moveSelectionDown() {
     if ( $(".selected").length ) {
@@ -65,41 +67,40 @@ $(document).ready( function() {
     } else {
       $("#results-list li").first().addClass('selected')
     }
-  }
+  };
 
-  $("#query").keydown( function(ev) {
-    if (ev.keyCode === 38 || ev.keyCode === 40) {
-      if (ev.keyCode === 38) {
+  $("#query").keydown( function(evt) {
+    var keyCode = evt.keyCode;
+
+    if (keyCode === 38 || keyCode === 40) {
+      if (keyCode === 38) {
         moveSelectionUp();
       } else {
         moveSelectionDown();
       }
     }
 
-    else if (ev.keyCode === 13) {
-
-      if ($(this).val() === previous_search) {
-        var url = $(".selected a").attr('href') + "/with/" + $(".selected a").text()
-        createChromeTab(url)
-
+    else if (keyCode === 13) {
+      var val = $(this).val();
+      var $selected = $(".selected");
+      if ($selected.length) {
+        var url = $(".selected a").attr('href') + "/with/" + $(".selected a").text();
+        createChromeTab(url);
       }
-
+      return false;
     }
 
     else {
-
       window.clearTimeout(t)
-      var t = window.setTimeout( function() {
+      t = window.setTimeout( function() {
         $("#search-form").submit()
-      }, 200)
-
+      }, 200);
     }
-
-  })
+  });
 
   $("#results-list li a").live('click', function(ev) {
     var url = $(this).attr('href') + "/with/" + $(this).text()
     createChromeTab(url)
-  })
+  });
 
 })
